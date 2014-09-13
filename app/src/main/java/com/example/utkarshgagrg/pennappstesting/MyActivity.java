@@ -145,6 +145,7 @@ public class MyActivity extends Activity {
                     Log.i("CHANGE: DOWN","");
                     if (!direction.equals(newDirection)) {
                         direction = newDirection;
+                        strumMethodUp();
                         return ;
                     }
                 }
@@ -303,17 +304,56 @@ public class MyActivity extends Activity {
         }
     }
 
+    private void strumMethodUp(){
+
+        if (strumG) {
+            upPlayG();
+        }
+        else if (strumC) {
+            upPlayG();
+        }
+        else if (strumD) {
+            upPlayD();
+        }
+        else if (strumEm) {
+            upPlayEm();
+        }
+    }
+
 
     private void downPlayG() {
         successPlayer = new MediaPlayer();
         if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.g_low);
+            successPlayer = MediaPlayer.create(this, R.raw.g_down_low);
         }
         else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.g_low);
+            successPlayer = MediaPlayer.create(this, R.raw.g_down_low);
         }
         else if (intensity==2) {
-            successPlayer = MediaPlayer.create(this, R.raw.g_low);
+            successPlayer = MediaPlayer.create(this, R.raw.g_down_low);
+        }
+        successPlayer.setLooping(false);
+        successPlayer.start();
+
+        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                successPlayer.release();
+            }
+        });
+
+    }
+
+    private void upPlayG() {
+        successPlayer = new MediaPlayer();
+        if(intensity==0) {
+            successPlayer = MediaPlayer.create(this, R.raw.g_up_low);
+        }
+        else if (intensity==1) {
+            successPlayer = MediaPlayer.create(this, R.raw.g_up_low);
+        }
+        else if (intensity==2) {
+            successPlayer = MediaPlayer.create(this, R.raw.g_up_low);
         }
         successPlayer.setLooping(false);
         successPlayer.start();
@@ -330,13 +370,36 @@ public class MyActivity extends Activity {
     private void downPlayC() {
         successPlayer = new MediaPlayer();
         if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.c_low);
+            successPlayer = MediaPlayer.create(this, R.raw.c_down_low);
         }
         else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.c_low);
+            successPlayer = MediaPlayer.create(this, R.raw.c_down_low);
         }
         else if (intensity==2) {
-            successPlayer = MediaPlayer.create(this, R.raw.c_low);
+            successPlayer = MediaPlayer.create(this, R.raw.c_down_low);
+        }
+        successPlayer.setLooping(false);
+        successPlayer.start();
+
+        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                successPlayer.release();
+            }
+        });
+
+    }
+
+    private void upPlayC() {
+        successPlayer = new MediaPlayer();
+        if(intensity==0) {
+            successPlayer = MediaPlayer.create(this, R.raw.c_up_low);
+        }
+        else if (intensity==1) {
+            successPlayer = MediaPlayer.create(this, R.raw.c_up_low);
+        }
+        else if (intensity==2) {
+            successPlayer = MediaPlayer.create(this, R.raw.c_up_low);
         }
         successPlayer.setLooping(false);
         successPlayer.start();
@@ -353,13 +416,36 @@ public class MyActivity extends Activity {
     private void downPlayD() {
         successPlayer = new MediaPlayer();
         if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.d_low);
+            successPlayer = MediaPlayer.create(this, R.raw.d_down_low);
         }
         else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.d_low);
+            successPlayer = MediaPlayer.create(this, R.raw.d_down_low);
         }
         else if (intensity==2) {
-            successPlayer = MediaPlayer.create(this, R.raw.d_low);
+            successPlayer = MediaPlayer.create(this, R.raw.d_down_low);
+        }
+        successPlayer.setLooping(false);
+        successPlayer.start();
+
+        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                successPlayer.release();
+            }
+        });
+
+    }
+
+    private void upPlayD() {
+        successPlayer = new MediaPlayer();
+        if(intensity==0) {
+            successPlayer = MediaPlayer.create(this, R.raw.d_up_low);
+        }
+        else if (intensity==1) {
+            successPlayer = MediaPlayer.create(this, R.raw.d_up_low);
+        }
+        else if (intensity==2) {
+            successPlayer = MediaPlayer.create(this, R.raw.d_up_low);
         }
         successPlayer.setLooping(false);
         successPlayer.start();
@@ -376,13 +462,13 @@ public class MyActivity extends Activity {
     private void downPlayEm() {
         successPlayer = new MediaPlayer();
         if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.em_low);
+            successPlayer = MediaPlayer.create(this, R.raw.em_down_low);
         }
         else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.em_low);
+            successPlayer = MediaPlayer.create(this, R.raw.em_down_low);
         }
         else if (intensity==2) {
-            successPlayer = MediaPlayer.create(this, R.raw.em_low);
+            successPlayer = MediaPlayer.create(this, R.raw.em_down_low);
         }
         successPlayer.setLooping(false);
         successPlayer.start();
@@ -396,6 +482,28 @@ public class MyActivity extends Activity {
 
     }
 
+    private void upPlayEm() {
+        successPlayer = new MediaPlayer();
+        if(intensity==0) {
+            successPlayer = MediaPlayer.create(this, R.raw.em_up_low);
+        }
+        else if (intensity==1) {
+            successPlayer = MediaPlayer.create(this, R.raw.em_up_low);
+        }
+        else if (intensity==2) {
+            successPlayer = MediaPlayer.create(this, R.raw.em_up_low);
+        }
+        successPlayer.setLooping(false);
+        successPlayer.start();
+
+        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                successPlayer.release();
+            }
+        });
+
+    }
 
     @Override
     protected void onResume() {
