@@ -17,6 +17,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dependencies {
+        repositories {
+            maven {
+                url '/Users/utkarshgagrg/Desktop/myo-android-sdk-0.6.0/myorepository'
+            }
+        }
+
+        compile('com.thalmic:myosdk:0.6.+@aar')
+    }
 }
 
 dependencies {
