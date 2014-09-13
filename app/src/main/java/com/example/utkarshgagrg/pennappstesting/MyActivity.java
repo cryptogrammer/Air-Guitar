@@ -3,7 +3,6 @@ package com.example.utkarshgagrg.pennappstesting;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.thalmic.myo.AbstractDeviceListener;
@@ -27,8 +25,6 @@ import com.thalmic.myo.Vector3;
 import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
-import java.util.Vector;
-
 import static android.view.View.OnTouchListener;
 
 
@@ -36,15 +32,20 @@ public class MyActivity extends Activity {
 
     private Button chordG, chordC, chordD, chordEm, myoButton;
     private MediaPlayer successPlayer;
-    private boolean[] strumG = {false,false,false};
-    private boolean[] strumC = {false,false,false};
-    private boolean[] strumD = {false,false,false};
-    private boolean[] strumEm = {false,false,false};
+    private boolean strumG = false;
+    private boolean strumC = false;
+    private boolean strumD = false;
+    private boolean strumEm = false;
     private int intensity = 0;
     private float originalPitch = 0;
     private float newPitch = 0;
-    private boolean directionChange = false;
     private String direction = "up";
+
+
+    private Vector3 gravity = new Vector3();
+    private Vector3 acceleration = new Vector3();
+
+    private double rawIntensity = 0.0;
 
 
     // This code will be returned in onActivityResult() when the enable Bluetooth activity exits.
@@ -97,7 +98,7 @@ public class MyActivity extends Activity {
             float roll = (float) Math.toDegrees(Quaternion.roll(rotation));
             newPitch = (float) Math.toDegrees(Quaternion.pitch(rotation));
             float yaw = (float) Math.toDegrees(Quaternion.yaw(rotation));
-            playMusic();
+            checkPitch();
 
 
             // Adjust roll and pitch for the orientation of the Myo on the arm.
@@ -112,24 +113,30 @@ public class MyActivity extends Activity {
 //            mTextView.setRotationY(yaw);
         }
 
-        public void playMusic(){
-            if(checkPitch()==1){
-                strumMethod();
-            }
-        }
 
-        public int checkPitch() {
+        public void checkPitch() {
             float difference = newPitch - originalPitch;
             if (Math.abs(difference) > 10) {
                 System.out.println("CHANGE");
                 originalPitch = newPitch;
+                Log.i("INTENSITY:", rawIntensity+"");
+                if (rawIntensity >= 1.3) {
+                    intensity = 2;
+                } else if (rawIntensity < 1.3 && rawIntensity >0.5) {
+                    intensity = 1;
+                } else {
+                    intensity = 0;
+                }
+
+                Log.i("CHANGE: INTENSITY", intensity + "");
+
                 if (difference < 0) {
                     // down to up
                     String newDirection = "up";
                     Log.i("CHANGE: UP","");
                     if (!direction.equals(newDirection)) {
                         direction = newDirection;
-                        return 0;
+                        strumMethod();
                     }
 
                 } else {
@@ -138,29 +145,28 @@ public class MyActivity extends Activity {
                     Log.i("CHANGE: DOWN","");
                     if (!direction.equals(newDirection)) {
                         direction = newDirection;
-                        return 1;
+                        return ;
                     }
                 }
             }
-
-            return -1;
         }
 
- /*       public void onAccelerometerData(Myo myo, long timestamp, Vector3 accel) {
+        public void onAccelerometerData(Myo myo, long timestamp, Vector3 accel) {
             double alpha = 0.8;
 
-            Vector3 gravity = new Vector3(alpha * gravity.x() + (1-alpha) * accel.x(),
+            gravity = new Vector3(alpha * gravity.x() + (1-alpha) * accel.x(),
                     alpha * gravity.y() + (1-alpha) * accel.y(),
                     alpha * gravity.z() + (1-alpha) * accel.z());
 
-            Vector3 acceleration = new Vector3(accel.x() - gravity.x(),
+            acceleration = new Vector3(accel.x() - gravity.x(),
                     accel.y() - gravity.y(),
                     accel.z() - gravity.z());
 
-            double acc_mag = Math.sqrt(acceleration.x() * acceleration.x() +
+            rawIntensity = Math.sqrt(acceleration.x() * acceleration.x() +
                     acceleration.y() + acceleration.y() +
                     acceleration.z() + acceleration.z());
-        }*/
+
+        }
 
         // onPose() is called whenever a Myo provides a new pose.
         @Override
@@ -220,23 +226,12 @@ public class MyActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if(intensity==0) {
-                        strumG[0] = true;
-                        return strumG[0];
+                        strumG = true;
+                        return strumG;
                     }
-                    else if(intensity==1) {
-                        strumG[1] = true;
-                        return strumG[1];
-                    }
-                    else if(intensity==2) {
-                        strumG[2] = true;
-                        return strumG[2];
-                    }
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumG[0] = false;
-                    strumG[1] = false;
-                    strumG[2] = false;
-                    return false;
+                    else if (event.getAction() == MotionEvent.ACTION_UP) {
+                        strumG = false;
+                        return false;
                 }
                 return false;
             }
@@ -247,22 +242,11 @@ public class MyActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if(intensity==0) {
-                        strumC[0] = true;
-                        return strumC[0];
-                    }
-                    else if(intensity==1) {
-                        strumC[1] = true;
-                        return strumC[1];
-                    }
-                    else if(intensity==2) {
-                        strumC[2] = true;
-                        return strumC[2];
-                    }
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumC[0] = false;
-                    strumC[1] = false;
-                    strumC[2] = false;
+                    strumC = true;
+                    return strumC;
+                }
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    strumC = false;
                     return false;
                 }
                 return false;
@@ -274,22 +258,11 @@ public class MyActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if(intensity==0) {
-                        strumD[0] = true;
-                        return strumD[0];
-                    }
-                    else if(intensity==1) {
-                        strumD[1] = true;
-                        return strumD[1];
-                    }
-                    else if(intensity==2) {
-                        strumD[2] = true;
-                        return strumD[2];
-                    }
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumD[0] = false;
-                    strumD[1] = false;
-                    strumD[2] = false;
+                    strumD = true;
+                    return strumD;
+                }
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    strumD = false;
                     return false;
                 }
                 return false;
@@ -301,22 +274,10 @@ public class MyActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if(intensity==0) {
-                        strumEm[0] = true;
-                        return strumEm[0];
-                    }
-                    else if(intensity==1) {
-                        strumEm[1] = true;
-                        return strumEm[1];
-                    }
-                    else if(intensity==2) {
-                        strumEm[2] = true;
-                        return strumEm[2];
-                    }
+                    strumEm = true;
+                    return strumEm;
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumEm[0] = false;
-                    strumEm[1] = false;
-                    strumEm[2] = false;
+                    strumEm = false;
                     return false;
                 }
                 return false;
@@ -328,48 +289,32 @@ public class MyActivity extends Activity {
 
     private void strumMethod(){
 
-        if (strumG[0]) {
-            playG();
+        if (strumG) {
+            downPlayG();
         }
-        else if (strumG[1]) {
-            playG();
+        else if (strumC) {
+            downPlayC();
         }
-        else if (strumG[2]) {
-            playG();
+        else if (strumD) {
+            downPlayD();
         }
-        else if (strumC[0]) {
-            playC();
+        else if (strumEm) {
+            downPlayEm();
         }
-        else if (strumC[1]) {
-            playC();
-        }
-        else if (strumC[2]) {
-            playC();
-        }
-        else if (strumD[0]) {
-            playD();
-        }
-        else if (strumD[1]) {
-            playD();
-        }
-        else if (strumD[2]) {
-            playD();
-        }
-        else if (strumEm[0]) {
-            playEm();
-        }
-        else if (strumEm[1]) {
-            playEm();
-        }
-        else if (strumEm[2]) {
-            playEm();
-        }
-
     }
 
-    private void playG() {
+
+    private void downPlayG() {
         successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.g_low);
+        if(intensity==0) {
+            successPlayer = MediaPlayer.create(this, R.raw.g_low);
+        }
+        else if (intensity==1) {
+            successPlayer = MediaPlayer.create(this, R.raw.g_low);
+        }
+        else if (intensity==2) {
+            successPlayer = MediaPlayer.create(this, R.raw.g_low);
+        }
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -382,9 +327,17 @@ public class MyActivity extends Activity {
 
     }
 
-    private void playC() {
+    private void downPlayC() {
         successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.c_low);
+        if(intensity==0) {
+            successPlayer = MediaPlayer.create(this, R.raw.c_low);
+        }
+        else if (intensity==1) {
+            successPlayer = MediaPlayer.create(this, R.raw.c_low);
+        }
+        else if (intensity==2) {
+            successPlayer = MediaPlayer.create(this, R.raw.c_low);
+        }
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -397,9 +350,17 @@ public class MyActivity extends Activity {
 
     }
 
-    private void playD() {
+    private void downPlayD() {
         successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.d_low);
+        if(intensity==0) {
+            successPlayer = MediaPlayer.create(this, R.raw.d_low);
+        }
+        else if (intensity==1) {
+            successPlayer = MediaPlayer.create(this, R.raw.d_low);
+        }
+        else if (intensity==2) {
+            successPlayer = MediaPlayer.create(this, R.raw.d_low);
+        }
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -412,9 +373,17 @@ public class MyActivity extends Activity {
 
     }
 
-    private void playEm() {
+    private void downPlayEm() {
         successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.em_low);
+        if(intensity==0) {
+            successPlayer = MediaPlayer.create(this, R.raw.em_low);
+        }
+        else if (intensity==1) {
+            successPlayer = MediaPlayer.create(this, R.raw.em_low);
+        }
+        else if (intensity==2) {
+            successPlayer = MediaPlayer.create(this, R.raw.em_low);
+        }
         successPlayer.setLooping(false);
         successPlayer.start();
 
