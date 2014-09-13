@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,55 +16,101 @@ import static android.view.View.OnTouchListener;
 
 public class MyActivity extends Activity {
 
-    private Button soundButton, myoButton;
+    private Button chordG, chordC, chordD, chordEm, myoButton;
     private MediaPlayer successPlayer;
-    private boolean strum = false;
-    private GestureDetector gd;
-    private Context context;
+    private boolean strumG = false;
+    private boolean strumC = false;
+    private boolean strumD = false;
+    private boolean strumEm = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-        myoButton = (Button) findViewById(R.id.myo);
-        myoButton.setOnTouchListener(new OnTouchListener() {
+        chordG = (Button) findViewById(R.id.chordG);
+        chordG.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    strum = true;
-                    return strum;
+                    strumG = true;
+                    return strumG;
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strum = false;
-                    return strum;
+                    strumG = false;
+                    return strumG;
                 }
                 return false;
             }
         });
-        GestureDetector.SimpleOnGestureListener sogl =
-                new GestureDetector.SimpleOnGestureListener() {
 
-                    public boolean onDown(MotionEvent event) {
-                        return true;
-                    }
+        chordC = (Button) findViewById(R.id.chordC);
+        chordC.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    strumC = true;
+                    return strumC;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    strumC = false;
+                    return strumC;
+                }
+                return false;
+            }
+        });
 
-                    public void onLongPress(MotionEvent event) {
-                        if(event.getAction() == MotionEvent.ACTION_MOVE){
-                            playSuccess();
-                        }
-                    }
-                };
+        chordD = (Button) findViewById(R.id.chordD);
+        chordD.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    strumD = true;
+                    return strumD;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    strumD = false;
+                    return strumD;
+                }
+                return false;
+            }
+        });
+
+        chordEm = (Button) findViewById(R.id.chordEm);
+        chordEm.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    strumEm = true;
+                    return strumEm;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    strumEm = false;
+                    return strumEm;
+                }
+                return false;
+            }
+        });
+
         // OK. it works. Need to interchange the functionality of the
         // 2 buttons. make the chord a boolean and and the strum play sound.
-        gd = new GestureDetector(context, sogl);
-        soundButton = (Button) findViewById(R.id.soundButton);
-        soundButton.setOnLongClickListener(new View.OnLongClickListener() {
+        myoButton = (Button) findViewById(R.id.myo);
+        myoButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if(strum) {
-                    playSuccess();
+                if (strumG) {
+                    playG();
                     return true;
                 }
+                if (strumC) {
+                    playC();
+                    return true;
+                }
+                if (strumD) {
+                    playD();
+                    return true;
+                }
+                if (strumEm) {
+                    playEm();
+                    return true;
+                }
+
                 return false;
             }
         });
@@ -82,9 +127,54 @@ public class MyActivity extends Activity {
     }
 
 
-    private void playSuccess() {
+    private void playG() {
         successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.playsoundtest);
+        successPlayer = MediaPlayer.create(this, R.raw.g);
+        successPlayer.setLooping(false);
+        successPlayer.start();
+
+        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                successPlayer.release();
+            }
+        });
+
+    }
+
+    private void playC() {
+        successPlayer = new MediaPlayer();
+        successPlayer = MediaPlayer.create(this, R.raw.c);
+        successPlayer.setLooping(false);
+        successPlayer.start();
+
+        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                successPlayer.release();
+            }
+        });
+
+    }
+
+    private void playD() {
+        successPlayer = new MediaPlayer();
+        successPlayer = MediaPlayer.create(this, R.raw.d);
+        successPlayer.setLooping(false);
+        successPlayer.start();
+
+        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                successPlayer.release();
+            }
+        });
+
+    }
+
+    private void playEm() {
+        successPlayer = new MediaPlayer();
+        successPlayer = MediaPlayer.create(this, R.raw.em);
         successPlayer.setLooping(false);
         successPlayer.start();
 

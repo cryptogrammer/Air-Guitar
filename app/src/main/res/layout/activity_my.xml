@@ -11,17 +11,44 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Play Sound"
-        android:id="@+id/soundButton"
-        android:layout_marginTop="102dp"
+        android:text="G"
+        android:id="@+id/chordG"
+        android:layout_marginTop="31dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="39dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Myo"
         android:id="@+id/myo"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="105dp"
+        android:layout_below="@+id/chordC"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="D"
+        android:id="@+id/chordD"
+        android:layout_below="@+id/chordG"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="36dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Em"
+        android:id="@+id/chordEm"
+        android:layout_below="@+id/chordD"
+        android:layout_alignStart="@+id/chordG" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C"
+        android:id="@+id/chordC"
+        android:layout_below="@+id/chordEm"
+        android:layout_alignStart="@+id/chordD" />
 </RelativeLayout>
