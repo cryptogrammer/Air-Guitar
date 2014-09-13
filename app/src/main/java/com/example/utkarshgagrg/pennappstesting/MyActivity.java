@@ -1,10 +1,8 @@
 package com.example.utkarshgagrg.pennappstesting;
 
 import android.app.Activity;
-import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -18,10 +16,11 @@ public class MyActivity extends Activity {
 
     private Button chordG, chordC, chordD, chordEm, myoButton;
     private MediaPlayer successPlayer;
-    private boolean strumG = false;
-    private boolean strumC = false;
-    private boolean strumD = false;
-    private boolean strumEm = false;
+    private boolean[] strumG = {false,false,false};
+    private boolean[] strumC = {false,false,false};
+    private boolean[] strumD = {false,false,false};
+    private boolean[] strumEm = {false,false,false};
+    private int intensity =0;
 
 
     @Override
@@ -33,11 +32,23 @@ public class MyActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    strumG = true;
-                    return strumG;
+                    if(intensity==0) {
+                        strumG[0] = true;
+                        return strumG[0];
+                    }
+                    else if(intensity==1) {
+                        strumG[1] = true;
+                        return strumG[1];
+                    }
+                    else if(intensity==2) {
+                        strumG[2] = true;
+                        return strumG[2];
+                    }
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumG = false;
-                    return strumG;
+                    strumG[0] = false;
+                    strumG[1] = false;
+                    strumG[2] = false;
+                    return false;
                 }
                 return false;
             }
@@ -48,11 +59,23 @@ public class MyActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    strumC = true;
-                    return strumC;
+                    if(intensity==0) {
+                        strumC[0] = true;
+                        return strumC[0];
+                    }
+                    else if(intensity==1) {
+                        strumC[1] = true;
+                        return strumC[1];
+                    }
+                    else if(intensity==2) {
+                        strumC[2] = true;
+                        return strumC[2];
+                    }
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumC = false;
-                    return strumC;
+                    strumC[0] = false;
+                    strumC[1] = false;
+                    strumC[2] = false;
+                    return false;
                 }
                 return false;
             }
@@ -63,11 +86,23 @@ public class MyActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    strumD = true;
-                    return strumD;
+                    if(intensity==0) {
+                        strumD[0] = true;
+                        return strumD[0];
+                    }
+                    else if(intensity==1) {
+                        strumD[1] = true;
+                        return strumD[1];
+                    }
+                    else if(intensity==2) {
+                        strumD[2] = true;
+                        return strumD[2];
+                    }
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumD = false;
-                    return strumD;
+                    strumD[0] = false;
+                    strumD[1] = false;
+                    strumD[2] = false;
+                    return false;
                 }
                 return false;
             }
@@ -78,11 +113,23 @@ public class MyActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    strumEm = true;
-                    return strumEm;
+                    if(intensity==0) {
+                        strumEm[0] = true;
+                        return strumEm[0];
+                    }
+                    else if(intensity==1) {
+                        strumEm[1] = true;
+                        return strumEm[1];
+                    }
+                    else if(intensity==2) {
+                        strumEm[2] = true;
+                        return strumEm[2];
+                    }
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumEm = false;
-                    return strumEm;
+                    strumEm[0] = false;
+                    strumEm[1] = false;
+                    strumEm[2] = false;
+                    return false;
                 }
                 return false;
             }
@@ -94,23 +141,54 @@ public class MyActivity extends Activity {
         myoButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if (strumG) {
+                if (strumG[0]) {
                     playG();
                     return true;
                 }
-                if (strumC) {
+                else if (strumG[1]) {
+                    playG();
+                    return true;
+                }
+                else if (strumG[2]) {
+                    playG();
+                    return true;
+                }
+                else if (strumC[0]) {
                     playC();
                     return true;
                 }
-                if (strumD) {
+                else if (strumC[1]) {
+                    playC();
+                    return true;
+                }
+                else if (strumC[2]) {
+                    playC();
+                    return true;
+                }
+                else if (strumD[0]) {
                     playD();
                     return true;
                 }
-                if (strumEm) {
+                else if (strumD[1]) {
+                    playD();
+                    return true;
+                }
+                else if (strumD[2]) {
+                    playD();
+                    return true;
+                }
+                else if (strumEm[0]) {
                     playEm();
                     return true;
                 }
-
+                else if (strumEm[1]) {
+                    playEm();
+                    return true;
+                }
+                else if (strumEm[2]) {
+                    playEm();
+                    return true;
+                }
                 return false;
             }
         });
@@ -126,10 +204,9 @@ public class MyActivity extends Activity {
 //        });
     }
 
-
     private void playG() {
         successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.g);
+        successPlayer = MediaPlayer.create(this, R.raw.g_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -144,7 +221,7 @@ public class MyActivity extends Activity {
 
     private void playC() {
         successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.c);
+        successPlayer = MediaPlayer.create(this, R.raw.c_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -159,7 +236,7 @@ public class MyActivity extends Activity {
 
     private void playD() {
         successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.d);
+        successPlayer = MediaPlayer.create(this, R.raw.d_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -174,7 +251,7 @@ public class MyActivity extends Activity {
 
     private void playEm() {
         successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.em);
+        successPlayer = MediaPlayer.create(this, R.raw.em_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
