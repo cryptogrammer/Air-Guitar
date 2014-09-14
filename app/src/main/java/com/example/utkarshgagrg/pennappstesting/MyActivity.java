@@ -403,12 +403,7 @@ public class MyActivity extends Activity {
 
     private void downPlayG() {
         successPlayer = new MediaPlayer();
-        if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.g_short);
-        }
-        else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.g_down_low);
-        }
+        successPlayer = MediaPlayer.create(this, R.raw.g_down_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -423,12 +418,7 @@ public class MyActivity extends Activity {
 
     private void upPlayG() {
         successPlayer = new MediaPlayer();
-        if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.g_short);
-        }
-        else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.g_up_low);
-        }
+        successPlayer = MediaPlayer.create(this, R.raw.g_up_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -443,12 +433,7 @@ public class MyActivity extends Activity {
 
     private void downPlayC() {
         successPlayer = new MediaPlayer();
-        if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.c_short);
-        }
-        else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.c_down_low);
-        }
+        successPlayer = MediaPlayer.create(this, R.raw.c_down_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -463,12 +448,7 @@ public class MyActivity extends Activity {
 
     private void upPlayC() {
         successPlayer = new MediaPlayer();
-        if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.c_short);
-        }
-        else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.c_up_low);
-        }
+        successPlayer = MediaPlayer.create(this, R.raw.c_up_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -483,12 +463,7 @@ public class MyActivity extends Activity {
 
     private void downPlayD() {
         successPlayer = new MediaPlayer();
-        if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.d_short);
-        }
-        else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.d_down_low);
-        }
+        successPlayer = MediaPlayer.create(this, R.raw.d_down_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -503,12 +478,7 @@ public class MyActivity extends Activity {
 
     private void upPlayD() {
         successPlayer = new MediaPlayer();
-        if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.d_short);
-        }
-        else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.d_up_low);
-        }
+        successPlayer = MediaPlayer.create(this, R.raw.d_up_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -523,12 +493,7 @@ public class MyActivity extends Activity {
 
     private void downPlayEm() {
         successPlayer = new MediaPlayer();
-        if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.em_short);
-        }
-        else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.em_down_low);
-        }
+        successPlayer = MediaPlayer.create(this, R.raw.em_down_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -543,12 +508,7 @@ public class MyActivity extends Activity {
 
     private void upPlayEm() {
         successPlayer = new MediaPlayer();
-        if(intensity==0) {
-            successPlayer = MediaPlayer.create(this, R.raw.em_short);
-        }
-        else if (intensity==1) {
-            successPlayer = MediaPlayer.create(this, R.raw.em_up_low);
-        }
+        successPlayer = MediaPlayer.create(this, R.raw.em_up_low);
         successPlayer.setLooping(false);
         successPlayer.start();
 
