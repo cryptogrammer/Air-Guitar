@@ -32,7 +32,7 @@ import java.io.IOException;
 import static android.view.View.OnTouchListener;
 
 
-public class MyActivity extends Activity {
+public class AirGuitarActivity extends Activity {
 
     private Button chordG, chordC, chordD, chordEm;
     private MediaPlayer successPlayer;
@@ -204,7 +204,7 @@ public class MyActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
+        setContentView(R.layout.activity_air_guitar);
 
         outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/airGuitarRecording.3gp";
 
@@ -227,13 +227,13 @@ public class MyActivity extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 chordG.setBackgroundResource(R.drawable.bluechord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        strumG = true;
-                        return strumG;
-                    }
-                    else if (event.getAction() == MotionEvent.ACTION_UP) {
-                        strumG = false;
-                        chordG.setBackgroundResource(R.drawable.unpressedbluechord);
-                        return false;
+                    strumG = true;
+                    return strumG;
+                }
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    strumG = false;
+                    chordG.setBackgroundResource(R.drawable.unpressedbluechord);
+                    return false;
                 }
                 return false;
             }

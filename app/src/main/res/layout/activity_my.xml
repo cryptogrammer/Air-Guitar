@@ -1,87 +1,19 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/appdefaultnochords"
+    android:background="@drawable/homewithoutbutton"
     android:orientation="vertical"
     tools:context=".MyActivity">
 
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="40dp">
 
-        <TableRow>
-
-            <Button
-                android:id="@+id/startBtn"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
-                android:background="@drawable/startrecording"
-                android:onClick="onStartClick" />
-        </TableRow>
-
-        <TableRow>
-            <Button
-                android:id="@+id/stopBtn"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
-                android:background="@drawable/stoprecording"
-                android:onClick="onStopClick" />
-        </TableRow>
-
-        <TableRow>
-            <Button
-                android:id="@+id/playLoopBtn"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
-                android:onClick="onPlayLoopClick"
-                android:background="@drawable/playloop" />
-        </TableRow>
-
-        <TableRow>
-
-            <Button
-                android:id="@+id/stopLoopBtn"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
-                android:onClick="onStopLoopClick"
-                android:background="@drawable/stoploop" />
-        </TableRow>
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/chordC"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/unpressedredchord"
-            android:text="C" />
-
-        <Button
-            android:id="@+id/chordG"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/unpressedbluechord"
-            android:text="G" />
-
-        <Button
-            android:id="@+id/chordEm"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/unpressedgreenchord"
-            android:text="Em" />
-
-        <Button
-            android:id="@+id/chordD"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/unpressedyellowchord"
-            android:text="D" />
-
-
-    </TableRow>
-</TableLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:id="@+id/getStartedBtn"
+        android:onClick="onGetStartedClick"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/getstarted"/>
+</RelativeLayout>

@@ -12,14 +12,16 @@
     <string name="pose_rest">Rest</string>
     <string name="arm_left">Left Arm</string>
     <string name="arm_right">Right Arm</string>
-
     <string name="g_chord">G</string>
     <string name="d_chord">D</string>
     <string name="c_chord">C</string>
     <string name="em_chord">Em</string>
-
-
     <string name="startRecording">Start Recording</string>
     <string name="stopRecording">Stop Recording</string>
     <string name="playRecording">Play Loop</string>
+    <string name="title_activity_air_guitar">AirGuitarActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="getStartedBtn">Get Started</string>
+    <string name="title_activity_synco_de_myo">SyncoDeMyo</string>
+
 </resources>
