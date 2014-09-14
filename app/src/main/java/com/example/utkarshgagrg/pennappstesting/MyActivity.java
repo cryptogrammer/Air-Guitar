@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,12 +27,14 @@ import com.thalmic.myo.Vector3;
 import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
+import java.io.IOException;
+
 import static android.view.View.OnTouchListener;
 
 
 public class MyActivity extends Activity {
 
-    private Button chordG, chordC, chordD, chordEm, myoButton;
+    private Button chordG, chordC, chordD, chordEm;
     private MediaPlayer successPlayer;
     private boolean strumG = false;
     private boolean strumC = false;
@@ -41,11 +45,16 @@ public class MyActivity extends Activity {
     private float newPitch = 0;
     private String direction = "up";
 
-
     private Vector3 gravity = new Vector3();
     private Vector3 acceleration = new Vector3();
-
     private double rawIntensity = 0.0;
+
+    private Button startBtn, stopBtn, loopBtn, stopLoopBtn;
+    private MediaRecorder myRecorder;
+    private MediaPlayer myPlayer;
+    private String outputFile = null;
+
+    private View appView;
 
 
     // This code will be returned in onActivityResult() when the enable Bluetooth activity exits.
@@ -173,42 +182,37 @@ public class MyActivity extends Activity {
                 case UNKNOWN:
                     Log.i("UNKNOWN","");
                     break;
-                case REST:
-                    int restTextId = R.string.hello_world;
-                    switch (mArm) {
-                        case LEFT:
-                            restTextId = R.string.arm_left;
-                            break;
-                        case RIGHT:
-                            restTextId = R.string.arm_right;
-                            break;
-                    }
-                    Log.i("UNKNOWN","");
-                    break;
                 case FIST:
-                    Log.i("UNKNOWN","");
+                    onStartClick(findViewById(android.R.id.content));
                     break;
                 case WAVE_IN:
                     Log.i("UNKNOWN","");
                     break;
                 case WAVE_OUT:
-                    Log.i("UNKNOWN","");
+                    onPlayLoopClick(findViewById(android.R.id.content));
                     break;
                 case FINGERS_SPREAD:
-                    Log.i("UNKNOWN","");
+                    onStopClick(findViewById(android.R.id.content));
                     break;
                 case THUMB_TO_PINKY:
-                    Log.i("UNKNOWN","");
+                    onStopLoopClick(findViewById(android.R.id.content));
                     break;
             }
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+
+        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/airGuitarRecording.3gp";
+
+        myRecorder = new MediaRecorder();
+        myRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        myRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        myRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
+        myRecorder.setOutputFile(outputFile);
 
         Hub hub = Hub.getInstance();
         if (!hub.init(this, getPackageName())) {
@@ -289,6 +293,80 @@ public class MyActivity extends Activity {
         });
 
         hub.addListener(mListener);
+
+        startBtn = (Button)findViewById(R.id.startBtn);
+        stopBtn = (Button)findViewById(R.id.stopBtn);
+        loopBtn = (Button)findViewById(R.id.playLoopBtn);
+        stopLoopBtn = (Button)findViewById(R.id.stopLoopBtn);
+    }
+
+    public void onStartClick(View view) {
+        try {
+            myRecorder.prepare();
+            myRecorder.start();
+
+            startBtn.setEnabled(false);
+            stopBtn.setEnabled(true);
+
+            Toast.makeText(getApplicationContext(), "Starting recording...", Toast.LENGTH_SHORT).show();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onStopClick(View view) {
+        try {
+            myRecorder.stop();
+            myRecorder.release();
+            myRecorder = null;
+
+            stopBtn.setEnabled(false);
+            startBtn.setEnabled(true);
+
+            Toast.makeText(getApplicationContext(), "Stop recording...", Toast.LENGTH_SHORT).show();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onPlayLoopClick(View view) {
+        try {
+            loopBtn.setBackgroundResource(R.drawable.playingloop);
+
+            myPlayer = new MediaPlayer();
+            myPlayer.setDataSource(outputFile);
+            myPlayer.prepare();
+            myPlayer.setLooping(true);
+            myPlayer.start();
+
+            loopBtn.setEnabled(false);
+            stopLoopBtn.setEnabled(true);
+
+            Toast.makeText(getApplicationContext(), "Playing loop...", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onStopLoopClick(View view) {
+        try {
+            if (myPlayer != null) {
+                loopBtn.setBackgroundResource(R.drawable.playloop);
+
+                myPlayer.setLooping(false);
+                myPlayer.stop();
+                myPlayer.release();
+                myPlayer = null;
+                loopBtn.setEnabled(true);
+                stopLoopBtn.setEnabled(false);
+
+                Toast.makeText(getApplicationContext(), "Stoping loop...", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
     }
 
     private void strumMethod(){
@@ -322,7 +400,6 @@ public class MyActivity extends Activity {
             upPlayEm();
         }
     }
-
 
     private void downPlayG() {
         successPlayer = new MediaPlayer();

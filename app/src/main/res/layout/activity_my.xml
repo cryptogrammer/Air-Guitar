@@ -7,13 +7,46 @@
     tools:context=".MyActivity">
 
     <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="30dp">
+        android:layout_width="fill_parent"
+        android:layout_height="40dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="testing" />
+        <TableRow>
+
+            <Button
+                android:id="@+id/startBtn"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:background="@drawable/startrecording"
+                android:onClick="onStartClick" />
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/stopBtn"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:background="@drawable/stoprecording"
+                android:onClick="onStopClick" />
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/playLoopBtn"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:onClick="onPlayLoopClick"
+                android:background="@drawable/playloop" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/stopLoopBtn"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:onClick="onStopLoopClick"
+                android:background="@drawable/stoploop" />
+        </TableRow>
     </TableRow>
 
     <TableRow
@@ -41,6 +74,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/unpressedgreenchord"
             android:text="Em" />
+
         <Button
             android:id="@+id/chordD"
             android:layout_width="150dp"
