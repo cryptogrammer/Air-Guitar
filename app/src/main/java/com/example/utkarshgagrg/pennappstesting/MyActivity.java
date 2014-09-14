@@ -116,7 +116,7 @@ public class MyActivity extends Activity {
 
         public void checkPitch() {
             float difference = newPitch - originalPitch;
-            if (Math.abs(difference) > 15) {
+            if (Math.abs(difference) > 10) {
                 System.out.println("CHANGE");
                 originalPitch = newPitch;
                 Log.i("INTENSITY:", rawIntensity+"");
@@ -221,12 +221,14 @@ public class MyActivity extends Activity {
         chordG.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                chordG.setBackgroundResource(R.drawable.bluechord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         strumG = true;
                         return strumG;
                     }
                     else if (event.getAction() == MotionEvent.ACTION_UP) {
                         strumG = false;
+                        chordG.setBackgroundResource(R.drawable.unpressedbluechord);
                         return false;
                 }
                 return false;
@@ -237,12 +239,14 @@ public class MyActivity extends Activity {
         chordC.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                chordC.setBackgroundResource(R.drawable.redchord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     strumC = true;
                     return strumC;
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP) {
                     strumC = false;
+                    chordC.setBackgroundResource(R.drawable.unpressedredchord);
                     return false;
                 }
                 return false;
@@ -253,12 +257,14 @@ public class MyActivity extends Activity {
         chordD.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                chordD.setBackgroundResource(R.drawable.yellowchord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     strumD = true;
                     return strumD;
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP) {
                     strumD = false;
+                    chordD.setBackgroundResource(R.drawable.unpressedyellowchord);
                     return false;
                 }
                 return false;
@@ -269,11 +275,13 @@ public class MyActivity extends Activity {
         chordEm.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                chordEm.setBackgroundResource(R.drawable.greenchord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     strumEm = true;
                     return strumEm;
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     strumEm = false;
+                    chordEm.setBackgroundResource(R.drawable.unpressedgreenchord);
                     return false;
                 }
                 return false;

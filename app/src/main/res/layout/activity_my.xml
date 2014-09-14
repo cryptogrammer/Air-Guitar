@@ -1,54 +1,53 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/appdefaultnochords"
+    android:orientation="vertical"
     tools:context=".MyActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="G"
-        android:id="@+id/chordG"
-        android:layout_marginTop="31dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="39dp" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Myo"
-        android:id="@+id/myo"
-        android:layout_marginTop="105dp"
-        android:layout_below="@+id/chordC"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="testing" />
+    </TableRow>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="D"
-        android:id="@+id/chordD"
-        android:layout_below="@+id/chordG"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="36dp" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Em"
-        android:id="@+id/chordEm"
-        android:layout_below="@+id/chordD"
-        android:layout_alignStart="@+id/chordG" />
+        <Button
+            android:id="@+id/chordC"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/unpressedredchord"
+            android:text="C" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="C"
-        android:id="@+id/chordC"
-        android:layout_below="@+id/chordEm"
-        android:layout_alignStart="@+id/chordD" />
-</RelativeLayout>
+        <Button
+            android:id="@+id/chordG"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/unpressedbluechord"
+            android:text="G" />
+
+        <Button
+            android:id="@+id/chordEm"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/unpressedgreenchord"
+            android:text="Em" />
+        <Button
+            android:id="@+id/chordD"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/unpressedyellowchord"
+            android:text="D" />
+
+
+    </TableRow>
+</TableLayout>
