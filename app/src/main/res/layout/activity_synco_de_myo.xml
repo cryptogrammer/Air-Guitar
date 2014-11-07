@@ -1,9 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/syncwithoutbutton"
-    tools:context="com.example.utkarshgagrg.pennappstesting.SyncoDeMyo">
+    tools:context="com.example.utkarshgagrg.airguitar.SyncoDeMyo">
 
 
     <Button

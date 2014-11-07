@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="main" >
+        <source path="/home/tika/Air-Guitar/myoSdk/src/main/res" >
+            <file
+                name="myosdk__firmware_incompatible_dot"
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/drawable/myosdk__firmware_incompatible_dot.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="myosdk__connected_dot"
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/drawable/myosdk__connected_dot.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/values-sw600dp/dimens.xml"
+                qualifiers="sw600dp-v13" >
+                <dimen name="myosdk__fragment_scan_window_width" >400dp
+                </dimen>
+                <dimen name="myosdk__fragment_scan_window_height" >500dp
+                </dimen>
+            </file>
+            <file
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/values-sw600dp/themes.xml"
+                qualifiers="sw600dp-v13" >
+
+                <style
+                    name="myosdk__ScanActivityTheme"
+                    parent="myosdk__PopupActivityTheme" />
+            </file>
+            <file
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/values/strings.xml"
+                qualifiers="" >
+                <string name="myosdk__title_activity_scan" >Choose a Myo
+                </string>
+                <string name="myosdk__action_scan" >Scan
+                </string>
+                <string name="myosdk__action_stop_scan" >Stop Scan
+                </string>
+                <string name="myosdk__firmware_incompatible" >Firmware version incompatible.
+                </string>
+                <string name="myosdk__unknown_myo" >Unknown Myo
+                </string>
+            </file>
+            <file
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/values/dimens.xml"
+                qualifiers="" >
+                <dimen name="myosdk__fragment_scan_window_width" >0dp
+                </dimen>
+                <dimen name="myosdk__activity_horizontal_margin" >16dp
+                </dimen>
+                <dimen name="myosdk__activity_vertical_margin" >16dp
+                </dimen>
+                <dimen name="myosdk__fragment_scan_window_height" >0dp
+                </dimen>
+            </file>
+            <file
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/values/themes.xml"
+                qualifiers="" >
+
+                <style
+                    name="myosdk__PopupActivityTheme"
+                    parent="android:Theme.Holo.Light.Dialog" >
+                    <item name="android:windowIsFloating">
+false
+                    </item>
+                    <item name="android:windowContentOverlay">
+@null
+                    </item>
+                    <item name="android:windowSoftInputMode">
+stateAlwaysHidden
+                    </item>
+                    <item name="android:windowActionBar">
+true
+                    </item>
+                    <item name="android:windowActionModeOverlay">
+false
+                    </item>
+                    <item name="android:windowIsTranslucent">
+true
+                    </item>
+                    <item name="android:backgroundDimAmount">
+0.5
+                    </item>
+                    <item name="android:backgroundDimEnabled">
+true
+                    </item>
+                </style>
+
+                <style
+                    name="myosdk__ScanActivityTheme"
+                    parent="android:Theme.Holo.Light" />
+            </file>
+            <file
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/values/colors.xml"
+                qualifiers="" >
+                <color name="myosdk__button_red" >#AE0922
+                </color>
+                <color name="myosdk__button_orange" >#FF8000
+                </color>
+                <color name="myosdk__thalmic_blue" >#00BCDD
+                </color>
+            </file>
+            <file
+                name="myosdk__fragment_scan"
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/menu/myosdk__fragment_scan.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                name="myosdk__fragment_scan"
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/layout/myosdk__fragment_scan.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="myosdk__activity_scan"
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/layout/myosdk__activity_scan.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="myosdk__device_list_item"
+                path="/home/tika/Air-Guitar/myoSdk/src/main/res/layout/myosdk__device_list_item.xml"
+                qualifiers=""
+                type="layout" />
+        </source>
+        <source path="/home/tika/Air-Guitar/myoSdk/build/generated/res/rs/debug" />
+        <source path="/home/tika/Air-Guitar/myoSdk/build/generated/res/generated/debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/home/tika/Air-Guitar/myoSdk/src/debug/res" />
+    </dataSet>
+
+</merger>

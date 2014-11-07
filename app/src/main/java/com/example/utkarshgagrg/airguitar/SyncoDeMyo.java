@@ -1,14 +1,10 @@
-package com.example.utkarshgagrg.pennappstesting;
+package com.example.utkarshgagrg.airguitar;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
-import com.example.utkarshgagrg.pennappstesting.R;
 
 public class SyncoDeMyo extends Activity {
 
@@ -23,7 +19,9 @@ public class SyncoDeMyo extends Activity {
     }
 
     public void onSyncoClick(View view) {
+        System.gc();
         Intent intent = new Intent(this, AirGuitarActivity.class);
         startActivity(intent);
+        finish();
     }
 }

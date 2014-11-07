@@ -1,4 +1,4 @@
-package com.example.utkarshgagrg.pennappstesting;
+package com.example.utkarshgagrg.airguitar;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
